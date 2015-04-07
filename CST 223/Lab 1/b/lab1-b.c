@@ -10,11 +10,11 @@ Purpose:  Computes Fibonacci sequence and factorial of user inputted value.
 
 int main()
 {
-	int num = 0;
+	int num = -1;
  
-	while (num <= 0)
+	while (num < 0)
 	{
-		printf("Please enter a number greater than zero: ");
+		printf("Please enter a number zero or greater: ");
 		if (!scanf("%d", &num))
 		{
 			printf("You must enter a valid number.\n");
@@ -24,14 +24,14 @@ int main()
 	printf("Fibonacci sequence: ");
 
 	// Compute Fibonacci sequence
-	if (num == 1)
+	if (num == 0)
 	{
 		printf("0");
 	}
 	else
 	{
 		printf("0, 1");
-		int i, newNum = num - 2, tmp2 = 1, tmp1 = 0, tmp0 = 0;
+		int i, newNum = num - 1, tmp2 = 1, tmp1 = 0, tmp0 = 0;
 		for (i = 0; i < newNum; i++)
 		{
 			tmp0 = tmp1;
