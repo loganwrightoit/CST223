@@ -1,6 +1,6 @@
 /*
 CST 223 - Concepts of Programming Languages
-Lab1 - Part b
+Lab - Fibonacci and Factorial
 Logan Wright
 
 Purpose:  Computes Fibonacci sequence and factorial of user inputted value.

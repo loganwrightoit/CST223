@@ -1,6 +1,6 @@
 /*
 CST 223 - Concepts of Programming Languages
-Lab1 - Part c
+Lab - Binary Search Tree
 Logan Wright
 
 Purpose:  A binary search tree implementation that reads

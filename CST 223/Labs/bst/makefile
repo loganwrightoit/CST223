@@ -9,7 +9,7 @@ RM = /bin/rm -f
 #
 #Variables for the file being compiled
 ###########################
-NAME = lab1-a
+NAME = cst223_bst
 ###########################
 #
 OBJS = $(NAME).o

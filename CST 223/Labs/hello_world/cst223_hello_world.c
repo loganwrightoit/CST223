@@ -1,6 +1,6 @@
 /*
 CST 223 - Concepts of Programming Languages
-Lab1 - Part a
+Lab - Hello World!
 Logan Wright
 
 Purpose:  A "Hello World!" application.
