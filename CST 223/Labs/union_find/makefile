@@ -9,7 +9,7 @@ RM = /bin/rm -f
 #
 #Variables for the file being compiled
 ###########################
-NAME = cst223_union
+NAME = cst223_union_find
 ###########################
 #
 OBJS = $(NAME).o
