@@ -1,10 +1,8 @@
-/*
-CST 223 - Concepts of Programming Languages
-Lab - Fibonacci and Factorial
-Logan Wright
-
-Purpose:  Computes Fibonacci sequence and factorial of user inputted value.
-*/
+/*****************************************************************************
+* File:		cst223_fib_fact.c
+* Author:	Logan Wright
+* Purpose:	Computes fibonacci sequence and factorial on user-inputted number
+*****************************************************************************/
 
 #include <stdio.h>
 

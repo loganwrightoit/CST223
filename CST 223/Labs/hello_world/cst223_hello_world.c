@@ -1,10 +1,8 @@
-/*
-CST 223 - Concepts of Programming Languages
-Lab - Hello World!
-Logan Wright
-
-Purpose:  A "Hello World!" application.
-*/
+/*****************************************************************************
+* File:		cst223_hello_world.c
+* Author:	Logan Wright
+* Purpose:	A Hello World! application.
+*****************************************************************************/
 
 #include <stdio.h>
 
