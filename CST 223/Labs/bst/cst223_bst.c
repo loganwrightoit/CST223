@@ -6,7 +6,7 @@
 *****************************************************************************/
 
 #include <stdio.h>
-#include <stdlib.h> // qsort & bsearch
+#include <stdlib.h>
 
 struct tree
 {
@@ -15,31 +15,6 @@ struct tree
     struct tree* right;
 };
 typedef struct tree node;
-
-int compare(const void * a, const void * b)
-{
-    return (*(int*)a - *(int*)b);
-}
-
-int getNumInts(FILE* file)
-{
-    int count = 0;
-    int i;
-    if (fscanf(file, "%d", &i))
-    {
-        while (!feof(file))
-        {
-            if (!fscanf(file, "%d", &i))
-            {
-                break;
-            }
-            count++;
-        }
-    }
-    rewind(file);
-
-    return count;
-}
 
 void treeInsert(node** tree, int num)
 {
@@ -79,8 +54,7 @@ node* treeSearch(node** tree, int num)
     {
         return NULL;
     }
-
-    if (num < (*tree)->value) // Search left branch
+	else if (num < (*tree)->value) // Search left branch
     {
         return treeSearch(&((*tree)->left), num);
     }
@@ -109,41 +83,54 @@ int main()
         return 1;
     }
 
-    // Get line count
-    int numInts = getNumInts(ptr_file);
-
-    // Check numbers exist
-    if (numInts <= 0)
-    {
-        printf("Did not find any values in file, exiting.\n");
-        fclose(ptr_file);
-        return 1;
-    }
-
-	printf("Reading numbers from file\n");
+	printf("Inserting numbers into tree\n");
 	
-    int i;
-    for (i = 0; i < numInts; i++)
+	int count = 0, min, max, num;
+    if (fscanf(ptr_file, "%d", &num))
     {
-        // Grab next number
-        int num;
-        if (!fscanf(ptr_file, "%d", &num))
+		min = max = num;
+        while (!feof(ptr_file))
         {
-            printf("Problem reading input file, exiting\n");
-            fclose(ptr_file);
-			
-			if (tree)
+            if (!fscanf(ptr_file, "%d", &num))
+            {
+				printf("Problem reading input file, exiting\n");
+				fclose(ptr_file);
+				
+				if (tree)
+				{
+					treeClear(tree);
+				}
+				return 1;
+            }
+
+			if (num < min)
 			{
-				treeClear(tree);
+				min = num;
 			}
-            return 1;
+			else if (num > max)
+			{
+				max = num;
+			}
+	
+	        // Insert number into tree
+			treeInsert(&tree, num);
+	
+            count++;
         }
-
-        // Insert number into tree
-        treeInsert(&tree, num);
     }
+	else
+	{
+		printf("Problem reading input file, exiting\n");
+		fclose(ptr_file);
+		
+		if (tree)
+		{
+			treeClear(tree);
+		}
+		return 1;
+	}
 
-    printf("Loaded %d numbers from file\n", numInts);
+    printf("Loaded %d numbers from file (Range %d-%d)\n", count, min, max);
 
     // Close input file
     fclose(ptr_file);
