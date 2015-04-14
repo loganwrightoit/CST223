@@ -86,23 +86,26 @@ int main()
 	printf("Inserting numbers into tree\n");
 	
 	int count = 0, min, max, num;
-    if (fscanf(ptr_file, "%d", &num))
-    {
-		min = max = num;
-        while (!feof(ptr_file))
-        {
-            if (!fscanf(ptr_file, "%d", &num))
-            {
-				printf("Problem reading input file, exiting\n");
-				fclose(ptr_file);
-				
-				if (tree)
-				{
-					treeClear(tree);
-				}
-				return 1;
-            }
+	while (!feof(ptr_file))
+	{	
+		if (!fscanf(ptr_file, "%d", &num))
+		{
+			printf("Problem reading input file, exiting\n");
+			fclose(ptr_file);
+			
+			if (tree)
+			{
+				treeClear(tree);
+			}
+			return 1;
+		}
 
+		if (count == 0)
+		{
+			min = max = num;
+		}
+		else
+		{
 			if (num < min)
 			{
 				min = num;
@@ -111,23 +114,12 @@ int main()
 			{
 				max = num;
 			}
-	
-	        // Insert number into tree
-			treeInsert(&tree, num);
-	
-            count++;
-        }
-    }
-	else
-	{
-		printf("Problem reading input file, exiting\n");
-		fclose(ptr_file);
-		
-		if (tree)
-		{
-			treeClear(tree);
 		}
-		return 1;
+
+		// Insert number into tree
+		treeInsert(&tree, num);
+
+		count++;
 	}
 
     printf("Loaded %d numbers from file (Range %d-%d)\n", count, min, max);

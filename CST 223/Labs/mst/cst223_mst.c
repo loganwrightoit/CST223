@@ -40,33 +40,33 @@ int Find(int num)
 	return result.element;
 }
 
-bool Union(int num1, int num2)
+int Union(int num1, int num2)
 {
 	if (num1 != num2)
 	{
 		nodeSet[num1].parent = &nodeSet[num2];
-		return true;
+		return 1;
 	}
 	else
 	{
-		return false;
+		return 0;
 	}
 }
 
 void Kruskal(int numNodes)
 {
-	int totalEdges = 0, edgePos = 0, weight;
+	int count = 0, pos = 0;
 	edge edgy;
-	while (totalEdges < (numNodes - 1))
+	while (count < (numNodes - 1))
 	{
-		edgy = edgeSet[edgePos++];
+		edgy = edgeSet[pos++];
 
 		// Do a union if parents do not match (build the tree)
 		int parent1 = Find(edgy.from->element);
 		int parent2 = Find(edgy.to->element);
 		if (Union(parent1, parent2))
 		{
-			totalEdges++;
+			count++;
 		}
 	}
 }
@@ -134,7 +134,7 @@ int main()
 	// Run Kruskal algorithm
 	Kruskal(numNodes);
 
-	printf("Minimum spanning tree constructed\n");
+	printf("Minimum spanning tree constructed\n\n");
 
 	printf("Node connections:\n");
 
