@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 #define NUM_THREADS 5
-#define MAX_PRIME 100
+#define MAX_PRIME 200
 
 int current = 1; // Start at first prime
 pthread_mutex_t thread_flag_mutex;
@@ -27,22 +27,30 @@ int get_next_candidate()
 
 int compute_prime(int numPrime)
 {
-    int candidate;
+    int candidate = 2;
     while (1)
     {
+        int factor;
         int is_prime = 1;
 
-        // Test primality by successive division
-        int factor;
-        for (factor = 2; factor < candidate && is_prime; ++factor)
+        /* Test primality by successive division.  */
+        for (factor = 2; factor < candidate; ++factor)
+        {
             if (candidate % factor == 0)
+            {
                 is_prime = 0;
+                break;
+            }
+        }
 
-        // Is this the prime number we're looking for?
-        if (is_prime && --numPrime <= 0)
-            return candidate;
-        
-        candidate++;
+        if (is_prime)
+        {
+            if (--numPrime == 0)
+            {
+                return candidate;
+            }
+        }
+        ++candidate;
     }
   
   return 0;
@@ -64,7 +72,8 @@ void* prime_job(void* t)
     
     while ((candidate = get_next_candidate()) <= MAX_PRIME)
     {
-        compute_prime(candidate);
+        int result = compute_prime(candidate);
+        printf("Thread %ld found prime %ld: %d\n", tid, candidate, result);
         ++total;
     }
 
