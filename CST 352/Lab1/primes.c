@@ -8,14 +8,18 @@
 #include <stdio.h>
 
 #define NUM_THREADS 5
+#define MAX_PRIME 100
 
-int thread_flag;
-int current = 2; // Start at first prime
+int current = 1; // Start at first prime
 pthread_mutex_t thread_flag_mutex;
 
-void initialize_flag ()
+int get_next_candidate()
 {
-    pthread_mutex_init(&thread_flag_mutex, NULL);
+    pthread_mutex_lock (&thread_flag_mutex);
+    int result = current++;
+    pthread_mutex_unlock (&thread_flag_mutex);
+    
+    return result;
 }
 
 /* Compute successive prime numbers (very inefficiently).  Return the
@@ -23,31 +27,23 @@ void initialize_flag ()
 
 int compute_prime(int numPrime)
 {
-  int candidate;
-  while (candidate++)
-  {
-    int is_prime = 1;
+    int candidate;
+    while (1)
+    {
+        int is_prime = 1;
 
-    /* Test primality by successive division.  */
-    int factor;
-    for (factor = 2; factor < candidate; ++factor)
-    {
-      if (candidate % factor == 0)
-      {
-        is_prime = 0;
-        break;
-      }
+        // Test primality by successive division
+        int factor;
+        for (factor = 2; factor < candidate && is_prime; ++factor)
+            if (candidate % factor == 0)
+                is_prime = 0;
+
+        // Is this the prime number we're looking for?
+        if (is_prime && --numPrime <= 0)
+            return candidate;
+        
+        candidate++;
     }
-    
-    /* Is this the prime number we're looking for?  */
-    if (is_prime)
-    {
-      if (--numPrime == 0)
-      {
-        return candidate;
-      }
-    }
-  }
   
   return 0;
 }
@@ -60,58 +56,40 @@ and breaks out of the loop if the maximum is exceeded.  Otherwise,
 it calls compute_prime().  Each thread should print its ID, the prime
 #, and the value of the prime.  
 */
-void* prime_job(void* arg)
+void* prime_job(void* t)
 {
-    int pid = (int) getpid();
-    int max_prime = *((int*) arg);
-    int outputCounter = 0;
+    long tid = (long) t, candidate = 0, total = 0;
     
-    int candidate = 0, numPrimesCalc, result;
-    while (candidate <= max_prime)
+    printf("Thread %ld starting...\n", tid);
+    
+    while ((candidate = get_next_candidate()) <= MAX_PRIME)
     {
-        pthread_mutex_lock (&thread_flag_mutex);
-        candidate = current++;
-        pthread_mutex_unlock (&thread_flag_mutex);
-
-        result = compute_prime(candidate);
-        
-        // Print result 125 times
-        if (outputCounter++ > 125)
-        {
-            printf("PID: %d computed %d prime: %d\n", pid, candidate, result);
-            outputCounter = 0;
-        }
-        
-        ++numPrimesCalc;
+        compute_prime(candidate);
+        ++total;
     }
-    
-    return (void*) numPrimesCalc;
+
+    pthread_exit((void*) total);
 }
 
 int main ()
 {
-  initialize_flag();
+    pthread_mutex_init(&thread_flag_mutex, NULL);
+    pthread_t thread[NUM_THREADS];
+    long t;
 
-  pthread_t thread[NUM_THREADS];
-  int which_prime = 5000;
-  int prime;
+    // Start threads
+    for (t = 0; t < NUM_THREADS; t++)
+        pthread_create(&thread[t], NULL, prime_job, (void *) t);
 
-  // Start threads
-  int i;
-  for (i = 0; i < NUM_THREADS; ++i)
-  {
-    pthread_create(&thread[i], NULL, &prime_job, &which_prime);
-  }
+    // Join threads
+    for (t = 0; t < NUM_THREADS; t++)
+    {
+        void* numPrimesCalc;
+        pthread_join(thread[t], &numPrimesCalc);
+        printf("Thread %ld joined, calculated %ld prime numbers\n", t, (long) numPrimesCalc);
+    }
 
-  // Join threads
-  for (i = 0; i < NUM_THREADS; ++i)
-  {
-    int numPrimesCalc;
-    pthread_join(thread[i], (void*) &numPrimesCalc);
-    printf("Thread joined, calced %d primes\n", numPrimesCalc);
-  }
-  
-  /* Print the largest prime it computed.  */
-  printf("The %dth prime number is %d.\n", which_prime, prime);
-  return 0;
+    /* Print the largest prime it computed.  */
+    
+    pthread_exit(NULL);
 }
