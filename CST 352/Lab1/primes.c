@@ -1,4 +1,7 @@
 /***********************************************************************
+* CST 352 Operating Systems - Lab 1
+* Logan Wright
+*
 * Code listing from "Advanced Linux Programming," by CodeSourcery LLC  *
 * Copyright (C) 2001 by New Riders Publishing                          *
 * See COPYRIGHT for license information.                               *
@@ -10,7 +13,7 @@
 #define NUM_THREADS 5
 #define MAX_PRIME 200
 
-int current = 1; // Start at first prime
+int current = 1;
 pthread_mutex_t thread_flag_mutex;
 
 int get_next_candidate()
@@ -23,8 +26,7 @@ int get_next_candidate()
 }
 
 /* Compute successive prime numbers (very inefficiently).  Return the
-   Nth prime number, where N is the value pointed to by *ARG.  */
-
+   Nth prime number.  */
 int compute_prime(int numPrime)
 {
     int candidate = 2;
@@ -56,14 +58,9 @@ int compute_prime(int numPrime)
   return 0;
 }
 
-/*
-Prime_job() should extract its ID and max prime value and then
-enter an endless loop that reads the master_list for a number,
-increments master_list, compares the number with the maximum value,
-and breaks out of the loop if the maximum is exceeded.  Otherwise,
-it calls compute_prime().  Each thread should print its ID, the prime
-#, and the value of the prime.  
-*/
+/* Threaded function that finds the Nth prime using a shared
+   global counter. Return the Nth prime number, where N is
+   the value pointed to by *t.  */
 void* prime_job(void* t)
 {
     long tid = (long) t, candidate = 0, total = 0;

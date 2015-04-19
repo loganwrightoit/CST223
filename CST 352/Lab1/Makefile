@@ -9,7 +9,7 @@
 OBJECTS		= 
 LIBRARIES	=
 # List all the programs to be built
-PROGRAMS	= primes thread-create thread-create2 thread-pid
+PROGRAMS	= primes
 
 # Link programs with the pthread library.
 LDLIBS		+= -lpthread

@@ -94,8 +94,8 @@ Thread 4 found prime 92: 479
 Thread 4 found prime 93: 487
 Thread 4 found prime 94: 491
 Thread 4 found prime 95: 499
-Thread 4 found prime 96: 503
 Thread 3 starting...
+Thread 3 found prime 97: 509
 Thread 3 found prime 98: 521
 Thread 3 found prime 99: 523
 Thread 3 found prime 100: 541
@@ -124,10 +124,10 @@ Thread 3 found prime 122: 673
 Thread 3 found prime 123: 677
 Thread 3 found prime 124: 683
 Thread 3 found prime 125: 691
-Thread 3 found prime 126: 701
-Thread 3 found prime 127: 709
-Thread 3 found prime 128: 719
 Thread 2 starting...
+Thread 2 found prime 127: 709
+Thread 2 found prime 128: 719
+Thread 2 found prime 129: 727
 Thread 2 found prime 130: 733
 Thread 2 found prime 131: 739
 Thread 2 found prime 132: 743
@@ -155,9 +155,9 @@ Thread 0 found prime 152: 881
 Thread 0 found prime 153: 883
 Thread 0 found prime 154: 887
 Thread 0 found prime 155: 907
-Thread 0 found prime 156: 911
-Thread 0 found prime 157: 919
 Thread 1 starting...
+Thread 1 found prime 157: 919
+Thread 1 found prime 158: 929
 Thread 1 found prime 159: 937
 Thread 1 found prime 160: 941
 Thread 1 found prime 161: 947
@@ -169,42 +169,42 @@ Thread 1 found prime 166: 983
 Thread 1 found prime 167: 991
 Thread 1 found prime 168: 997
 Thread 1 found prime 169: 1009
-Thread 1 found prime 170: 1013
-Thread 1 found prime 171: 1019
-Thread 1 found prime 172: 1021
-Thread 2 found prime 174: 1033
-Thread 2 found prime 175: 1039
-Thread 2 found prime 176: 1049
-Thread 2 found prime 177: 1051
-Thread 2 found prime 178: 1061
-Thread 2 found prime 179: 1063
-Thread 2 found prime 180: 1069
+Thread 4 found prime 96: 503
+Thread 4 found prime 171: 1019
+Thread 4 found prime 172: 1021
+Thread 4 found prime 173: 1031
+Thread 4 found prime 174: 1033
+Thread 4 found prime 175: 1039
+Thread 4 found prime 176: 1049
+Thread 4 found prime 177: 1051
+Thread 4 found prime 178: 1061
+Thread 4 found prime 179: 1063
 Thread 2 found prime 181: 1087
 Thread 2 found prime 182: 1091
 Thread 2 found prime 183: 1093
 Thread 2 found prime 184: 1097
 Thread 2 found prime 185: 1103
-Thread 4 found prime 97: 509
-Thread 4 found prime 187: 1117
-Thread 4 found prime 188: 1123
-Thread 4 found prime 189: 1129
-Thread 4 found prime 190: 1151
-Thread 4 found prime 191: 1153
-Thread 4 found prime 192: 1163
-Thread 4 found prime 193: 1171
-Thread 3 found prime 129: 727
+Thread 2 found prime 186: 1109
+Thread 2 found prime 187: 1117
+Thread 2 found prime 188: 1123
+Thread 3 found prime 126: 701
+Thread 3 found prime 190: 1151
+Thread 3 found prime 191: 1153
+Thread 3 found prime 192: 1163
+Thread 3 found prime 193: 1171
+Thread 3 found prime 194: 1181
 Thread 3 found prime 195: 1187
 Thread 3 found prime 196: 1193
 Thread 3 found prime 197: 1201
 Thread 3 found prime 198: 1213
+Thread 0 found prime 156: 911
+Thread 0 found prime 200: 1223
+Thread 1 found prime 170: 1013
+Thread 0 joined, calculated 16 prime numbers
+Thread 1 joined, calculated 14 prime numbers
+Thread 4 found prime 180: 1069
+Thread 2 found prime 189: 1129
+Thread 2 joined, calculated 24 prime numbers
 Thread 3 found prime 199: 1217
-Thread 3 found prime 200: 1223
-Thread 0 found prime 158: 929
-Thread 1 found prime 173: 1031
-Thread 4 found prime 194: 1181
-Thread 0 joined, calculated 17 prime numbers
-Thread 1 joined, calculated 15 prime numbers
-Thread 2 found prime 186: 1109
-Thread 2 joined, calculated 25 prime numbers
-Thread 3 joined, calculated 38 prime numbers
-Thread 4 joined, calculated 105 prime numbers
+Thread 3 joined, calculated 40 prime numbers
+Thread 4 joined, calculated 106 prime numbers
