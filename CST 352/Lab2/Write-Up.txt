@@ -1,0 +1,7 @@
+Solution 1:
+
+    The problem with this solution is the shared resources in a multi-threaded environment.  One thread may only partially execute instructions before control is handed over to another thread, which then has to work with inconsistent states.
+    
+Solution 2:
+
+    This solution helps ensure that the item count into the buffer is synchronized between threads.  However, the critical areas themselves are still capable of being executed concurrently, which could result in loss of data in the buffer.
